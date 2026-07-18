@@ -770,6 +770,16 @@ h1, h2, h3 {
   border: 1px solid var(--line);
 }
 
+/* Vertical (9:16) videos — sized to their true ratio and centered, instead
+   of pillarboxed inside the default widescreen frame. */
+.video-vertical video {
+  aspect-ratio: 9 / 16;
+  width: auto;
+  max-width: 100%;
+  max-height: 82vh;
+  margin: 0 auto;
+}
+
 .video-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -809,29 +819,24 @@ h1, h2, h3 {
 /* Top-8 band: the best-* folder picks across the TOP in a row-based grid
    (4 across x 2 rows on desktop). The masonry .collage below is unchanged.
    Tiles reuse .collage-item so the lightbox + captions work identically. */
-.gallery-top {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+/* One seamless masonry: gallery.js deals every photo (best-* picks first)
+   round-robin into these shared columns, so the picks span the top row and
+   the rest flow straight down the same columns — no seam between them.
+   Photos keep their natural proportions; .collage-item styling is reused. */
+.collage-cols {
+  display: flex;
+  align-items: flex-start;
   gap: 16px;
-  margin-bottom: 16px;
 }
 
-.gallery-top .collage-item {
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: var(--bg-raise);
-  margin-bottom: 0;
-}
-
-.gallery-top .collage-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.collage-col {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 @media (max-width: 640px) {
-  .gallery-top {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .collage-cols {
+    gap: 8px;
   }
 }
 

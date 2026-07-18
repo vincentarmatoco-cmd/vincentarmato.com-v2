@@ -1,1 +1,9 @@
+# Local backups of original media — not part of the deployed site.
+# video-original-backup/ holds 100MB+ files GitHub would reject.
 video-original-backup/
+photos-original-backup/
+.DS_Store
+
+# Local tooling — not part of the deployed site.
+graphify-out/
+.claude/
